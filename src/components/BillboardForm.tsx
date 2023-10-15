@@ -15,7 +15,6 @@ import toast from 'react-hot-toast';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import AlertModal from './modals/AlertModal';
-import useOrigin from '@/hooks/use-origin';
 import ImageUpload from './ui/image-upload';
 
 interface Props {
@@ -73,7 +72,7 @@ const BillboardForm: React.FC<Props> = ({ initialData }) => {
       setLoading(true);
       await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`);
       router.refresh();
-      router.push('/');
+      router.push(`/${params.storeId}/billboards`);
       toast.success('Billboard deleted');
     } catch (error) {
       toast.error('Make sure you have no billboard');
@@ -130,7 +129,6 @@ const BillboardForm: React.FC<Props> = ({ initialData }) => {
           </Button>
         </form>
       </Form>
-      <Separator />
     </>
   );
 };
